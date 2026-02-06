@@ -1,7 +1,12 @@
 const express = require('express');
 const cors = require('cors');
 const app = express();
+const compression = require('compression');
+const path = require('path')
 const PORT = 3000;
+
+// Enable Gzip compression
+app.use(compression());
 
 app.use(cors());
 app.use(express.json());
@@ -26,13 +31,17 @@ app.post('/subscribe-price-drop', (req, res) => {
 })
 
 app.get('/assets/price-drop-widget.min.js', (req, res) => {
-    const filePath = path.join(__dirname, 'public', 'assets', 'price-drop-widget.min.js');
 
-    // 2. Send the file with the required headers
+    const filePath = path.join(
+        __dirname,
+        'assets',
+        'price-drop-widget.min.js'
+    );
+    console.log(filePath);
     res.sendFile(filePath, {
         headers: {
             'Content-Type': 'application/javascript',
-            'Cache-Control': 'public, max-age=3600', // Cache for 1 hour
+            // 'Cache-Control': 'no-cache', // Cache for 1 hour
             'X-Content-Type-Options': 'nosniff'     // Security best practice
         }
     }, (err) => {
@@ -42,6 +51,18 @@ app.get('/assets/price-drop-widget.min.js', (req, res) => {
         }
     });
 });
+
+// const fs = require('fs');
+
+// const debugPath = path.join(__dirname, 'assets');
+// console.log("Checking folder:", debugPath);
+
+// try {
+//     const files = fs.readdirSync(debugPath);
+//     console.log("Files found in that folder:", files);
+// } catch (e) {
+//     console.log("Could not even find the folder! Error:", e.message);
+// }
 
 app.get('/', (req, res) => {
     res.send('Hello, World!');
