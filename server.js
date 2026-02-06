@@ -25,6 +25,10 @@ app.post('/subscribe-price-drop', (req, res) => {
 
 })
 
+app.get('/assets/price-drop-widget.min.js', (req, res) => {
+    res.send('Hello, World!');
+});
+
 app.get('/', (req, res) => {
     res.send('Hello, World!');
 });
