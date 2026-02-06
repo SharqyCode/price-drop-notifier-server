@@ -26,7 +26,21 @@ app.post('/subscribe-price-drop', (req, res) => {
 })
 
 app.get('/assets/price-drop-widget.min.js', (req, res) => {
-    res.send('Hello, World!');
+    const filePath = path.join(__dirname, 'public', 'assets', 'price-drop-widget.min.js');
+
+    // 2. Send the file with the required headers
+    res.sendFile(filePath, {
+        headers: {
+            'Content-Type': 'application/javascript',
+            'Cache-Control': 'public, max-age=3600', // Cache for 1 hour
+            'X-Content-Type-Options': 'nosniff'     // Security best practice
+        }
+    }, (err) => {
+        if (err) {
+            console.error("Widget file not found!", err);
+            res.status(404).send('Widget source not found.');
+        }
+    });
 });
 
 app.get('/', (req, res) => {
