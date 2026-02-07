@@ -52,17 +52,14 @@ app.get('/assets/price-drop-widget.min.js', (req, res) => {
     });
 });
 
-// const fs = require('fs');
+app.get('/embed/price-drop.html', (req, res) => {
+    const filePath = path.join(__dirname, 'embed', 'price-drop-embed.html');
+    res.sendFile(filePath);
+});
 
-// const debugPath = path.join(__dirname, 'assets');
-// console.log("Checking folder:", debugPath);
-
-// try {
-//     const files = fs.readdirSync(debugPath);
-//     console.log("Files found in that folder:", files);
-// } catch (e) {
-//     console.log("Could not even find the folder! Error:", e.message);
-// }
+app.get('/ping', (req, res) => {
+    res.status(200).send('pong');
+});
 
 app.get('/', (req, res) => {
     res.send('Hello, World!');
