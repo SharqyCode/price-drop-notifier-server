@@ -41,8 +41,8 @@ app.get('/assets/price-drop-widget.min.js', (req, res) => {
     res.sendFile(jsFilePath, {
         headers: {
             'Content-Type': 'application/javascript',
-            // 'Cache-Control': 'no-cache', // Cache for 1 hour
-            'X-Content-Type-Options': 'nosniff'     // Security best practice
+            'Cache-Control': 'max-age=3600',
+            'X-Content-Type-Options': 'nosniff'
         }
     }, (err) => {
         if (err) {
@@ -57,8 +57,8 @@ app.get('/assets/styles.min.css', (req, res) => {
     res.sendFile(stylesFilePath, {
         headers: {
             'Content-Type': 'text/css',
-            // 'Cache-Control': 'no-cache', // Cache for 1 hour
-            'X-Content-Type-Options': 'nosniff'     // Security best practice
+            'Cache-Control': 'max-age=3600',
+            'X-Content-Type-Options': 'nosniff'
         }
     }, (err) => {
         if (err) {
@@ -70,7 +70,18 @@ app.get('/assets/styles.min.css', (req, res) => {
 
 app.get('/embed/price-drop.html', (req, res) => {
     const filePath = path.join(__dirname, 'embed', 'price-drop-embed.html');
-    res.sendFile(filePath);
+    res.sendFile(filePath, {
+        headers: {
+            'Content-Type': 'text/html',
+            'Cache-Control': 'max-age=3600',
+            'X-Content-Type-Options': 'nosniff'
+        }
+    }, (err) => {
+        if (err) {
+            console.error("embed file not found!", err);
+            res.status(404).send('embed not found.');
+        }
+    });
 });
 
 app.get('/ping', (req, res) => {
