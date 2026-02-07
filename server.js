@@ -50,13 +50,10 @@ app.get('/assets/price-drop-widget.min.js', (req, res) => {
             res.status(404).send('Widget source not found.');
         }
     });
+});
 
-    console.log(stylesFilePath);
-    const stylesFilePath = path.join(
-        __dirname,
-        'assets',
-        'styles.min.css'
-    );
+app.get('/assets/styles.min.css', (req, res) => {
+    const stylesFilePath = path.join(__dirname, 'assets', 'styles.min.css');
     res.sendFile(stylesFilePath, {
         headers: {
             'Content-Type': 'text/css',
