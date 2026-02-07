@@ -58,7 +58,11 @@ app.get('/embed/price-drop.html', (req, res) => {
 });
 
 app.get('/ping', (req, res) => {
-    res.status(200).send('pong');
+    res.status(200).send('GET pong');
+});
+
+app.post('/pong', (req, res) => {
+    res.status(200).send('POST pong');
 });
 
 app.get('/', (req, res) => {
