@@ -32,13 +32,13 @@ app.post('/subscribe-price-drop', (req, res) => {
 
 app.get('/assets/price-drop-widget.min.js', (req, res) => {
 
-    const filePath = path.join(
+    const jsFilePath = path.join(
         __dirname,
         'assets',
         'price-drop-widget.min.js'
     );
-    console.log(filePath);
-    res.sendFile(filePath, {
+    console.log(jsFilePath);
+    res.sendFile(jsFilePath, {
         headers: {
             'Content-Type': 'application/javascript',
             // 'Cache-Control': 'no-cache', // Cache for 1 hour
@@ -48,6 +48,25 @@ app.get('/assets/price-drop-widget.min.js', (req, res) => {
         if (err) {
             console.error("Widget file not found!", err);
             res.status(404).send('Widget source not found.');
+        }
+    });
+
+    console.log(stylesFilePath);
+    const stylesFilePath = path.join(
+        __dirname,
+        'assets',
+        'styles.min.css'
+    );
+    res.sendFile(stylesFilePath, {
+        headers: {
+            'Content-Type': 'text/css',
+            // 'Cache-Control': 'no-cache', // Cache for 1 hour
+            'X-Content-Type-Options': 'nosniff'     // Security best practice
+        }
+    }, (err) => {
+        if (err) {
+            console.error("styles file not found!", err);
+            res.status(404).send('styles not found.');
         }
     });
 });
