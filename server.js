@@ -61,7 +61,7 @@ app.get('/ping', (req, res) => {
     res.status(200).send('GET pong');
 });
 
-app.post('/pong', (req, res) => {
+app.post('/ping', (req, res) => {
     res.status(200).send('POST pong');
 });
 
