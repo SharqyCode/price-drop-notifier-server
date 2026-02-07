@@ -41,7 +41,7 @@ app.get('/assets/price-drop-widget.min.js', (req, res) => {
     res.sendFile(jsFilePath, {
         headers: {
             'Content-Type': 'application/javascript',
-            'Cache-Control': 'max-age=3600',
+            'Cache-Control': 'no-cache',
             'X-Content-Type-Options': 'nosniff'
         }
     }, (err) => {
@@ -57,7 +57,7 @@ app.get('/assets/styles.min.css', (req, res) => {
     res.sendFile(stylesFilePath, {
         headers: {
             'Content-Type': 'text/css',
-            'Cache-Control': 'max-age=3600',
+            'Cache-Control': 'no-cache',
             'X-Content-Type-Options': 'nosniff'
         }
     }, (err) => {
